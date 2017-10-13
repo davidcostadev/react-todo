@@ -17,6 +17,9 @@ const CopyWebpackPluginConfig = new CopyWebpackPlugin([
   }
 ])
 
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
+const WebpackCleanupPluginConfig = new WebpackCleanupPlugin()
+
 function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
@@ -25,7 +28,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name].[chunkhash].js',
+    filename: 'js/[name].[hash].js',
     chunkFilename: 'js/[id].[chunkhash].js'
   },
   module: {
@@ -61,6 +64,7 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     HtmlWebpackPluginConfig,
-    CopyWebpackPluginConfig
+    CopyWebpackPluginConfig,
+    WebpackCleanupPluginConfig
   ]
 }
