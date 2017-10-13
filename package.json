@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --hot --inline --open",
-    "start": "http-server dist",
+    "start": "npm run build && http-server dist",
     "build": "webpack"
   },
   "repository": {
