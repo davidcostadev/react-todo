@@ -2,6 +2,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import '~plugins/bootstrap'
+
 import '~assets/app.scss'
 
 import Name from '~layout/default'

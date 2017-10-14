@@ -4,6 +4,7 @@
   "description": "react todo application",
   "main": "src/main.js",
   "dependencies": {
+    "bootstrap": "4.0.0-beta",
     "http-server": "^0.10.0",
     "node-sass": "^4.5.3",
     "react": "^16.0.0",
