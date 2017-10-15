@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TodoList from '~components/Todo'
-
+import Errors from '~components/Errors'
 
 const tasks = [
   { id:'1', name: 'Tarefa 1' },
@@ -15,8 +15,10 @@ export default class Home extends React.Component {
     super(props)
 
     this.state = {
+      errors: [],
       task: '',
-      tasks
+      tasks,
+      btnAddDisabled: true
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,12 +26,23 @@ export default class Home extends React.Component {
   }
 
   handleChange(event) {
+    this.setState({
+      btnAddDisabled: event.target.value.length ? false : true
+    })
+
     this.setState({task: event.target.value})
   }
 
   addTask(event) {
     event.preventDefault()
     console.log('click on addTask')
+
+    if (this.state.task.trim().length === 0) {
+      this.setState({ errors: ['Por favor preencha o nome da tarefa.'] })
+      this.refs.input_task.focus()
+      return;
+    }
+
 
     this.state.tasks.push({
       id: (new Date()).getTime(),
@@ -47,6 +60,8 @@ export default class Home extends React.Component {
       <div className="container">
         <h1>TODO</h1>
 
+        <Errors errors={this.state.errors} />
+
         <TodoList tasks={this.state.tasks} />
         <br />
 
@@ -59,10 +74,12 @@ export default class Home extends React.Component {
               id="task-name"
               value={this.state.task}
               onChange={this.handleChange}
+              placeholder="nome da tarefa"
+              ref="input_task"
               className="form-control"/>
           </div>
           <div className="form-group">
-            <button type="submit" className="btn btn-success">Adicionar Tarefa</button>
+            <button type="submit" className="btn btn-success" disabled={this.state.btnAddDisabled}>Adicionar Tarefa</button>
           </div>
         </form>
       </div>);
