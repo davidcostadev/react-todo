@@ -3,6 +3,8 @@ import React from 'react'
 
 import '~assets/todo.scss'
 
+import Checkbox from './Checkbox'
+
 const TodoItem = ({ task }) => {
 
   const classesList = [ 'list-group-item' ]
@@ -11,26 +13,25 @@ const TodoItem = ({ task }) => {
     classesList.push('task-completed')
   }
 
+  const TestFunction = () => {
+    console.log('TestFunction')
+  }
+
   return <li
     className={classesList.join(' ')}  
     /* className={
       'list-group-item': true,
       'task-completed': task.completed
     } */
-    key={task.id}>{task.name}</li>
+    key={task.id}>
+    <Checkbox id={`task-${task.id}`} label={task.name} value={task.completed} onChange={TestFunction}/>
+  </li>
 }
 
-const TodoList = ({ tasks }) => {
+export default function TodoList ({ tasks }) {
   const todoNode = tasks.map((task, key) => {
     return <TodoItem task={task} key={key} />
   })
 
   return <ul className="list-group">{todoNode}</ul>
-}
-
-
-export default class Todo extends React.Component {
-  render() {
-    return <TodoList tasks={this.props.tasks} />
-  }
 }
