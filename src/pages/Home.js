@@ -4,10 +4,10 @@ import TodoList from '~components/Todo'
 import Errors from '~components/Errors'
 
 const tasks = [
-  { id:'1', name: 'Tarefa 1' },
-  { id:'2', name: 'Tarefa 2' },
-  { id:'3', name: 'Tarefa 3' },
-  { id:'4', name: 'Tarefa 4' },
+  { id:'1', name: 'Tarefa 1', completed: false },
+  { id:'2', name: 'Tarefa 2', completed: false },
+  { id:'3', name: 'Tarefa 3', completed: true },
+  { id:'4', name: 'Tarefa 4', completed: false },
 ]
 
 export default class Home extends React.Component {
@@ -27,7 +27,7 @@ export default class Home extends React.Component {
 
   handleChange(event) {
     this.setState({
-      btnAddDisabled: event.target.value.length ? false : true
+      btnAddDisabled: !event.target.value.length
     })
 
     this.setState({task: event.target.value})
@@ -46,7 +46,8 @@ export default class Home extends React.Component {
 
     this.state.tasks.push({
       id: (new Date()).getTime(),
-      name: this.state.task
+      name: this.state.task,
+      completed: false,
     })
 
     this.setState({
@@ -66,7 +67,7 @@ export default class Home extends React.Component {
         <br />
 
         <form className="form" onSubmit={this.addTask}>
-
+          <h2>Adicionar Tarefa</h2>
           <div className="form-group">
             <label htmlFor="task-name" className="label-control">Tarefa</label>
             <input

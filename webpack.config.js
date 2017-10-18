@@ -20,6 +20,14 @@ const CopyWebpackPluginConfig = new CopyWebpackPlugin([
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 const WebpackCleanupPluginConfig = new WebpackCleanupPlugin()
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin({
+  filename: "css/[name].[contenthash].css",
+  disable: false,
+})
+
+
 function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
@@ -29,7 +37,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[hash].js',
-    chunkFilename: 'js/[id].[chunkhash].js'
+    chunkFilename: 'js/[id].[chunkhash].js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -43,11 +52,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [ 'style-loader', 'css-loader', 'sass-loader' ],
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ],
+         use: extractSass.extract({
+            use: [{
+              loader: "css-loader",
+              options: {sourceMap: true}   
+            }, {
+                loader: "sass-loader",
+                options: {sourceMap: true}   
+            }],
+            // use style-loader in development 
+            fallback: "style-loader",
+            publicPath: "/"
+        })
       },
     ],
   },
@@ -69,6 +85,7 @@ module.exports = {
   plugins: [
     HtmlWebpackPluginConfig,
     CopyWebpackPluginConfig,
-    WebpackCleanupPluginConfig
+    WebpackCleanupPluginConfig,
+    extractSass,
   ]
 }

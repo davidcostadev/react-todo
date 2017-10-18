@@ -1,8 +1,23 @@
 
 import React from 'react'
 
+import '~assets/todo.scss'
+
 const TodoItem = ({ task }) => {
-  return <li className="list-group-item" key={task.id} >{task.name}</li>
+
+  const classesList = [ 'list-group-item' ]
+
+  if (task.completed) {
+    classesList.push('task-completed')
+  }
+
+  return <li
+    className={classesList.join(' ')}  
+    /* className={
+      'list-group-item': true,
+      'task-completed': task.completed
+    } */
+    key={task.id}>{task.name}</li>
 }
 
 const TodoList = ({ tasks }) => {
