@@ -1,7 +1,19 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+
+
 
 import TodoList from '~components/Todo'
 import Errors from '~components/Errors'
+
+import { addTodo } from '../store/actions'
+
+ 
+let AddTodo = ({ dispatch }) => {
+
+}
+
+AddTodo = connect()(AddTodo)
 
 const tasks = [
   { id:'1', name: 'Tarefa 1', completed: false },
