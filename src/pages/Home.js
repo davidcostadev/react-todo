@@ -10,7 +10,7 @@ import { addTodo } from '../store/actions'
 
  
 let AddTodo = ({ dispatch }) => {
-
+  dispatch(addTodo())
 }
 
 AddTodo = connect()(AddTodo)
