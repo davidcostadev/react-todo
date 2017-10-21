@@ -3,24 +3,26 @@ import { connect } from 'react-redux'
 
 
 
-import TodoList from '~components/Todo'
+// import TodoList from '~components/Todo'
 import Errors from '~components/Errors'
 
 import { addTodo } from '../store/actions'
 
- 
-let AddTodo = ({ dispatch }) => {
-  dispatch(addTodo())
-}
 
-AddTodo = connect()(AddTodo)
+import TodoListNew from './TodoList'
+import TodoForm from './TodoForm'
+// let AddTodo = ({ dispatch }) => {
+//   dispatch(addTodo())
+// }
 
-const tasks = [
-  { id:'1', name: 'Tarefa 1', completed: false },
-  { id:'2', name: 'Tarefa 2', completed: false },
-  { id:'3', name: 'Tarefa 3', completed: true },
-  { id:'4', name: 'Tarefa 4', completed: false },
-]
+// AddTodo = connect()(AddTodo)
+
+// const tasks = [
+//   { id:'1', name: 'Tarefa 1', completed: false },
+//   { id:'2', name: 'Tarefa 2', completed: false },
+//   { id:'3', name: 'Tarefa 3', completed: true },
+//   { id:'4', name: 'Tarefa 4', completed: false },
+// ]
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -29,7 +31,7 @@ export default class Home extends React.Component {
     this.state = {
       errors: [],
       task: '',
-      tasks,
+      // tasks,
       btnAddDisabled: true
     }
 
@@ -73,28 +75,13 @@ export default class Home extends React.Component {
       <div className="container">
         <h1>TODO</h1>
 
-        <Errors errors={this.state.errors} />
+        {/* <Errors errors={this.state.errors} /> */}
 
-        <TodoList tasks={this.state.tasks} />
-        <br />
+        <TodoListNew />        
+        {/* <TodoList tasks={this.state.tasks} /> */}
+        {/* <br /> */}
 
-        <form className="form" onSubmit={this.addTask}>
-          <h2>Adicionar Tarefa</h2>
-          <div className="form-group">
-            <label htmlFor="task-name" className="label-control">Tarefa</label>
-            <input
-              type="text"
-              id="task-name"
-              value={this.state.task}
-              onChange={this.handleChange}
-              placeholder="nome da tarefa"
-              ref="input_task"
-              className="form-control"/>
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-success" disabled={this.state.btnAddDisabled}>Adicionar Tarefa</button>
-          </div>
-        </form>
+        <TodoForm />
       </div>);
   }
 }

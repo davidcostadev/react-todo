@@ -28,8 +28,9 @@ const TodoItem = ({ task }) => {
   </li>
 }
 
-export default function TodoList ({ tasks }) {
-  const todoNode = tasks.map((task, key) => {
+export default function TodoList({ todo }) {
+  console.log(todo)
+  const todoNode = todo.map((task, key) => {
     return <TodoItem task={task} key={key} />
   })
 

@@ -2,7 +2,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import { Provider } from 'react-dom'
+import { Provider } from 'react-redux'
 
 import '~plugins/bootstrap'
 
@@ -13,7 +13,6 @@ import store from './store'
 import Name from '~layout/default'
 
 import Home from '~pages/Home'
-
 
 
 render(
