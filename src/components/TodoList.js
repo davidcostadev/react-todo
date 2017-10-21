@@ -1,9 +1,10 @@
-
 import React from 'react'
+import { connect } from 'react-redux'
 
 import '~assets/todo.scss'
 
 import Checkbox from './Checkbox'
+
 
 const TodoItem = ({ task }) => {
 
@@ -28,11 +29,22 @@ const TodoItem = ({ task }) => {
   </li>
 }
 
-export default function TodoList({ todo }) {
-  console.log(todo)
+const TodoList = ({ todo }) => {
   const todoNode = todo.map((task, key) => {
     return <TodoItem task={task} key={key} />
   })
 
   return <ul className="list-group">{todoNode}</ul>
 }
+
+
+const mapStateTodos = state => {
+  return state
+}
+
+
+const TodoListConnect = connect(
+  mapStateTodos
+) (TodoList)
+
+export default TodoListConnect

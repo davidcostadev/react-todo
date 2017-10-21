@@ -9,8 +9,8 @@ import Errors from '~components/Errors'
 import { addTodo } from '../store/actions'
 
 
-import TodoListNew from './TodoList'
-import TodoForm from './TodoForm'
+import TodoListNew from '~components/TodoList'
+import TodoForm from '~components/TodoForm'
 // let AddTodo = ({ dispatch }) => {
 //   dispatch(addTodo())
 // }

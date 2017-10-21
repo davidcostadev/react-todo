@@ -13,13 +13,11 @@ export const todo = (state = [], action) => {
         }
       ]
     case 'TOGGLE_TODO':
-      return state.map(todo => {
-        if (todo.id === action.id) {
-          todo.completed = !todo.completed
-        }
-        
-        return todo
-      })
+      return state.map(todo =>
+        (todo.id === action.id) 
+          ? {...todo, completed: !todo.completed}
+          : todo
+      )
     default:
       return state  
   }
