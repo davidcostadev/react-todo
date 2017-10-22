@@ -1,8 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
-import {addTodo} from '../store/actions.js'
+import { addTodo } from '../store/actions'
 
 
 let AddTodo = ({ dispatch }) => {
@@ -17,7 +17,7 @@ let AddTodo = ({ dispatch }) => {
           if (!input.value.trim()) {
             return
           }
-          console.log(input.value)
+
           dispatch(addTodo(input.value))
           input.value = ''
         }}
