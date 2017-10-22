@@ -42,6 +42,10 @@ const TodoList = ({ todo, onCompletedTodo }) => {
     return <TodoItem task={task} key={key} onCompleted={() => onCompletedTodo(task.id)}/>
   })
 
+  if (!todoNode.length) {
+    todoNode.push(<li className="list-group-item text-center">Nenhuma tarefa encontrada</li>)
+  }
+
   return <ul className="list-group">{todoNode}</ul>
 }
 
