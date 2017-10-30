@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 
 import '~assets/todo.scss'
 
-import { toogleTodo } from '../store/actions'
+import { toogleTodo, deleteTodo } from '../store/actions'
 
 import Checkbox from './Checkbox'
 
 
-const TodoItem = ({ task, onCompleted }) => {
+const TodoItem = ({ task, onCompleted, onDelete }) => {
 
-  const classesList = [ 'list-group-item' ]
+  const classesList = [ 'list-group-item', 'task-item' ]
 
   if (task.completed) {
     classesList.push('task-completed')
@@ -18,8 +18,8 @@ const TodoItem = ({ task, onCompleted }) => {
 
   // console.log(dispatch)
 
-  const TestFunction = (e) => {
-    console.log('TestFunction', e)
+  const deleteTask = (e) => {
+    console.log('deleteTask', e)
   }
 
   return <li
@@ -33,20 +33,29 @@ const TodoItem = ({ task, onCompleted }) => {
       id={`task-${task.id}`}
       label={task.name}
       value={task.completed} onChange={onCompleted} />
+ 
+      <button type="button" className="btn btn-sm btn-outline-danger" onClick={onDelete}>
+        <i className="material-icons">delete</i>
+      </button>
   </li>
 }
 
-const TodoList = ({ todo, onCompletedTodo }) => {
+const TodoList = ({ todo, onCompletedTodo, onDeleteTodo }) => {
   // console.log(dispatch)
   const todoNode = todo.map((task, key) => {
-    return <TodoItem task={task} key={key} onCompleted={() => onCompletedTodo(task.id)}/>
+    return <TodoItem
+      task={task}
+      key={key}
+      onCompleted={() => onCompletedTodo(task.id)}
+      onDelete={() => onDeleteTodo(task.id)}
+    />
   })
 
   if (!todoNode.length) {
-    todoNode.push(<li className="list-group-item text-center">Nenhuma tarefa encontrada</li>)
+    todoNode.push(<li className="list-group-item task-item text-center" key={0}>Nenhuma tarefa encontrada</li>)
   }
 
-  return <ul className="list-group">{todoNode}</ul>
+  return <ul className="list-group tasks">{todoNode}</ul>
 }
 
 
@@ -54,18 +63,17 @@ const mapStateTodos = state => {
   return state
 }
 
-const mapStateOnCompleted = dispatch => {
+const mapStateChange = dispatch => {
   return {
-    onCompletedTodo: id => {
-      dispatch(toogleTodo(id))
-    }
+    onCompletedTodo: id => dispatch(toogleTodo(id)),
+    onDeleteTodo: id => dispatch(deleteTodo(id))
   }
 }
 
 
 const TodoListConnect = connect(
   mapStateTodos,
-  mapStateOnCompleted
+  mapStateChange
 ) (TodoList)
 
 export default TodoListConnect

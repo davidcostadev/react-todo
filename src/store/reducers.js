@@ -18,6 +18,14 @@ export const todo = (state = [], action) => {
           ? {...todo, completed: !todo.completed}
           : todo
       )
+    case 'DELETE_TODO':
+      const newState = Object.assign([], state)
+      const indexOfState = state.findIndex(todo => todo.id === action.id)
+
+      newState.splice(indexOfState, 1)  
+
+      return newState
+      
     default:
       return state  
   }
