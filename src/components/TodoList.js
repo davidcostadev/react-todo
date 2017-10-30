@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import classNames from 'classNames'
+import classNames from 'classnames'
 
 import '~assets/todo.scss'
 
