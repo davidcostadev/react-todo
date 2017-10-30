@@ -10,32 +10,33 @@ let AddTodo = ({ dispatch }) => {
   // let ref_value ;
 
   return (
-    <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault()
-          if (!input.value.trim()) {
-            return
-          }
+    <div className="box">
+      <div className="box-content">
+        <form
+          onSubmit={e => {
+            e.preventDefault()
+            if (!input.value.trim()) {
+              return
+            }
 
-          dispatch(addTodo(input.value))
-          input.value = ''
-        }}
-      >
-        <h2>Adicionar Tarefa</h2>
-        <div className="form-group">
-          <label htmlFor="task-name" className="label-control">Tarefa</label>
-          <input
-            type="text"
-            id="task-name"
-            ref={node => { input = node } }
-            placeholder="nome da tarefa"
-            className="form-control"/>
-        </div>
-        <div className="form-group">
-          <button type="submit" className="btn btn-success">Adicionar Tarefa</button>
-        </div>
-      </form>
+            dispatch(addTodo(input.value))
+            input.value = ''
+          }}
+        >
+          <h2 className="sub-title">Adicionar Tarefa</h2>
+          <div className="form-group">
+            <input
+              type="text"
+              id="task-name"
+              ref={node => { input = node } }
+              placeholder="Nome da Tarefa"
+              className="form-control"/>
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-success">Adicionar Tarefa</button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

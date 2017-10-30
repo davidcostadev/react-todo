@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.17.0",
     "bootstrap": "4.0.0-beta",
+    "classnames": "^2.2.5",
     "extract-text-webpack-plugin": "^3.0.1",
     "http-server": "^0.10.0",
     "node-sass": "^4.5.3",

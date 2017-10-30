@@ -1,7 +1,28 @@
 $red: white;
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'vars';
 
 body {
   background: $red;
+  color: $textBase;
+}
+
+
+.box {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $gray200;
+  margin-bottom: 20px;
+
+  .box-content {
+    padding-left: 15px;
+    padding-right: 15px; 
+  }
+}
+
+
+.sub-title {
+  font-size: 16px;
+  color: $gray500;
 }

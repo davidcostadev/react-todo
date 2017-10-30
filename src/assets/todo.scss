@@ -3,3 +3,22 @@
   text-decoration: line-through;
   font-style: oblique;
 }
+
+
+.tasks {
+  margin-bottom: 20px;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+  }
+  label {
+    margin-bottom: 0;
+  }
+}

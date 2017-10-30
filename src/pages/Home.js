@@ -11,6 +11,10 @@ import { addTodo } from '../store/actions'
 
 import TodoListNew from '~components/TodoList'
 import TodoForm from '~components/TodoForm'
+
+import ToolBar from '~layout/Toolbar'
+
+
 // let AddTodo = ({ dispatch }) => {
 //   dispatch(addTodo())
 // }
@@ -72,16 +76,18 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <h1>TODO</h1>
-
-        {/* <Errors errors={this.state.errors} /> */}
-
-        <TodoListNew />        
-        {/* <TodoList tasks={this.state.tasks} /> */}
-        {/* <br /> */}
-
+      <div className="page">
+        <ToolBar title="TODO"/>
+        
         <TodoForm />
+        
+          {/* <Errors errors={this.state.errors} /> */}
+        <div className="container">
+          <TodoListNew />        
+          {/* <TodoList tasks={this.state.tasks} /> */}
+          {/* <br /> */}
+
+        </div>  
       </div>);
   }
 }
