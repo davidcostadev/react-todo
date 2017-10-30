@@ -29,14 +29,12 @@ export const todo = (state = [], { type, payload }) => {
       return newState
     case 'SAVE_EDITING':
       console.log('SAVE_EDITING')  
-      newState = Object.assign([], state)  
-        newState.map(todo =>
+        return state.map(todo =>
         (todo.id === payload.id) 
           ? {...todo, name: payload.name}
           : todo
         )
-      return newState
-      
+
     default:
       return state  
   }
