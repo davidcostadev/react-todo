@@ -40,9 +40,11 @@ const TodoItem = ({ task, onCompleted, onDelete }) => {
   </li>
 }
 
-const TodoList = ({ todo, onCompletedTodo, onDeleteTodo }) => {
-  // console.log(dispatch)
-  const todoNode = todo.map((task, key) => {
+
+const TodoNode = ({ todo, onCompletedTodo, onDeleteTodo }) => {
+  if (!todo.length) return <li className="list-group-item task-item text-center">Nenhuma tarefa encontrada</li>
+  
+  return todo.map((task, key) => {
     return <TodoItem
       task={task}
       key={key}
@@ -50,12 +52,10 @@ const TodoList = ({ todo, onCompletedTodo, onDeleteTodo }) => {
       onDelete={() => onDeleteTodo(task.id)}
     />
   })
+}
 
-  if (!todoNode.length) {
-    todoNode.push(<li className="list-group-item task-item text-center" key={0}>Nenhuma tarefa encontrada</li>)
-  }
-
-  return <ul className="list-group tasks">{todoNode}</ul>
+const TodoList = (payload) => {
+  return <ul className="list-group tasks">{TodoNode(payload)}</ul>
 }
 
 
