@@ -1,52 +1,52 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classNames'
 
 import '~assets/todo.scss'
 
-import { toogleTodo } from '../store/actions'
+import { toogleTodo, deleteTodo } from '../store/actions'
 
 import Checkbox from './Checkbox'
 
 
-const TodoItem = ({ task, onCompleted }) => {
+const TodoItem = ({ task, onCompleted, onDelete }) => {
 
-  const classesList = [ 'list-group-item' ]
-
-  if (task.completed) {
-    classesList.push('task-completed')
-  }
-
-  // console.log(dispatch)
-
-  const TestFunction = (e) => {
-    console.log('TestFunction', e)
-  }
+  const classLi = classNames({
+    'list-group-item': true,
+    'task-item': true,
+    'task-completed': task.completed,
+  })
 
   return <li
-    className={classesList.join(' ')}  
-    /* className={
-      'list-group-item': true,
-      'task-completed': task.completed
-    } */
+    className={classLi}
     key={task.id}>
     <Checkbox
       id={`task-${task.id}`}
       label={task.name}
       value={task.completed} onChange={onCompleted} />
+ 
+      <button type="button" className="btn btn-sm btn-outline-danger" onClick={onDelete}>
+        <i className="material-icons">delete</i>
+      </button>
   </li>
 }
 
-const TodoList = ({ todo, onCompletedTodo }) => {
-  // console.log(dispatch)
-  const todoNode = todo.map((task, key) => {
-    return <TodoItem task={task} key={key} onCompleted={() => onCompletedTodo(task.id)}/>
+
+const TodoNode = ({ todo, onCompletedTodo, onDeleteTodo }) => {
+  if (!todo.length) return <li className="list-group-item task-item text-center">Nenhuma tarefa encontrada</li>
+  
+  return todo.map((task, key) => {
+    return <TodoItem
+      task={task}
+      key={key}
+      onCompleted={() => onCompletedTodo(task.id)}
+      onDelete={() => onDeleteTodo(task.id)}
+    />
   })
+}
 
-  if (!todoNode.length) {
-    todoNode.push(<li className="list-group-item text-center">Nenhuma tarefa encontrada</li>)
-  }
-
-  return <ul className="list-group">{todoNode}</ul>
+const TodoList = (payload) => {
+  return <ul className="list-group tasks">{TodoNode(payload)}</ul>
 }
 
 
@@ -54,18 +54,17 @@ const mapStateTodos = state => {
   return state
 }
 
-const mapStateOnCompleted = dispatch => {
+const mapStateChange = dispatch => {
   return {
-    onCompletedTodo: id => {
-      dispatch(toogleTodo(id))
-    }
+    onCompletedTodo: id => dispatch(toogleTodo(id)),
+    onDeleteTodo: id => dispatch(deleteTodo(id))
   }
 }
 
 
 const TodoListConnect = connect(
   mapStateTodos,
-  mapStateOnCompleted
+  mapStateChange
 ) (TodoList)
 
 export default TodoListConnect
