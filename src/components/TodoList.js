@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classNames'
 
 import '~assets/todo.scss'
 
@@ -10,24 +11,14 @@ import Checkbox from './Checkbox'
 
 const TodoItem = ({ task, onCompleted, onDelete }) => {
 
-  const classesList = [ 'list-group-item', 'task-item' ]
-
-  if (task.completed) {
-    classesList.push('task-completed')
-  }
-
-  // console.log(dispatch)
-
-  const deleteTask = (e) => {
-    console.log('deleteTask', e)
-  }
+  const classLi = classNames({
+    'list-group-item': true,
+    'task-item': true,
+    'task-completed': task.completed,
+  })
 
   return <li
-    className={classesList.join(' ')}  
-    /* className={
-      'list-group-item': true,
-      'task-completed': task.completed
-    } */
+    className={classLi}
     key={task.id}>
     <Checkbox
       id={`task-${task.id}`}
