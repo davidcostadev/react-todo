@@ -1,7 +1,9 @@
 
 import { combineReducers } from 'redux'
 
-export const todo = (state = [], { type, payload}) => {
+export const todo = (state = [], { type, payload }) => {
+  let newState;
+
   switch (type) {
     case 'ADD_TODO':
       return [
@@ -19,13 +21,34 @@ export const todo = (state = [], { type, payload}) => {
           : todo
       )
     case 'DELETE_TODO':
-      const newState = Object.assign([], state)
+      newState = Object.assign([], state)
       const indexOfState = state.findIndex(todo => todo.id === payload.id)
 
       newState.splice(indexOfState, 1)  
 
       return newState
+    case 'SAVE_EDITING':
+      console.log('SAVE_EDITING')  
+      newState = Object.assign([], state)  
+        newState.map(todo =>
+        (todo.id === payload.id) 
+          ? {...todo, name: payload.name}
+          : todo
+        )
+      return newState
       
+    default:
+      return state  
+  }
+}
+
+export const editing = (state = null, { type, payload }) => {
+  switch (type) {
+    case 'CHANGE_EDITING':
+      console.log('CHANGE_EDITING')  
+      return payload.id
+    case 'CLEAR_EDITING':
+      return null
     default:
       return state  
   }
@@ -36,7 +59,8 @@ export const todo = (state = [], { type, payload}) => {
 
 
 const reducers = combineReducers({
-  todo
+  todo,
+  editing
 })
 
 export default reducers

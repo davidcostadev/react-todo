@@ -27,3 +27,27 @@ export const deleteTodo = id => {
     }
   }
 }
+
+export const changeEdit = id => {
+  return {
+    type: 'CHANGE_EDITING',
+    payload: {
+      id
+    }
+  }
+}
+
+export const clearEditing = id => {
+  return {
+    type: 'CLEAR_EDITING'
+  }
+}
+export const saveEdit = (id, name) => {
+  return {
+    type: 'SAVE_EDITING',
+    payload: {
+      id,
+      name
+    }
+  }
+}
