@@ -1,11 +1,19 @@
-
 import { combineReducers } from 'redux'
+import { 
+  ADD_TODO,
+  TOGGLE_TODO,
+  DELETE_TODO,
+  CHANGE_EDITING,
+  CLEAR_EDITING,
+  SAVE_EDITING,
+  CHANGE_TASK_NAME,
+} from './types'
 
 export const todo = (state = [], { type, payload }) => {
   let newState;
 
   switch (type) {
-    case 'ADD_TODO':
+    case ADD_TODO:
       return [
         ...state,
         {
@@ -14,21 +22,15 @@ export const todo = (state = [], { type, payload }) => {
           completed: false
         }
       ]
-    case 'TOGGLE_TODO':
+    case TOGGLE_TODO:
       return state.map(todo =>
         (todo.id === payload.id) 
           ? {...todo, completed: !todo.completed}
           : todo
       )
-    case 'DELETE_TODO':
-      newState = Object.assign([], state)
-      const indexOfState = state.findIndex(todo => todo.id === payload.id)
-
-      newState.splice(indexOfState, 1)  
-
-      return newState
-    case 'SAVE_EDITING':
-      console.log('SAVE_EDITING')  
+    case DELETE_TODO:
+      return state.filter(todo => todo.id !== payload.id)
+    case SAVE_EDITING:
         return state.map(todo =>
         (todo.id === payload.id) 
           ? {...todo, name: payload.name}
@@ -42,11 +44,19 @@ export const todo = (state = [], { type, payload }) => {
 
 export const editing = (state = null, { type, payload }) => {
   switch (type) {
-    case 'CHANGE_EDITING':
-      console.log('CHANGE_EDITING')  
+    case CHANGE_EDITING:
       return payload.id
-    case 'CLEAR_EDITING':
+    case CLEAR_EDITING:
       return null
+    default:
+      return state  
+  }
+}
+
+export const formEdit = (state = 'editando', { type, payload }) => {
+  switch (type) {
+    case CHANGE_TASK_NAME:
+      return payload.name
     default:
       return state  
   }
@@ -54,11 +64,10 @@ export const editing = (state = null, { type, payload }) => {
 
 
 
-
-
 const reducers = combineReducers({
   todo,
-  editing
+  editing,
+  formEdit
 })
 
 export default reducers
