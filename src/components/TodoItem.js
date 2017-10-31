@@ -23,13 +23,15 @@ class TodoItem extends React.Component {
   }
   
   formEditting() {
+    const classes = classNames({
+      'list-group-item': true,
+      'task-item': true,
+      'task-completed': this.props.task.completed,
+    })
+    
     return (
       <li
-      className={classNames({
-        'list-group-item': true,
-        'task-item': true,
-        'task-completed': this.props.task.completed,
-      })}
+      className={classes}
       key={this.props.task.id}>
         <input
           type="text"
@@ -47,13 +49,15 @@ class TodoItem extends React.Component {
   }
 
   taskDefault() {
+    const classes = classNames({
+      'list-group-item': true,
+      'task-item': true,
+      'task-completed': this.props.task.completed,
+    })
+    
     return (
       <li
-      className={classNames({
-        'list-group-item': true,
-        'task-item': true,
-        'task-completed': this.props.task.completed,
-      })}
+      className={classes}
       key={this.props.task.id}>
         <Checkbox
           id={`task-${this.props.task.id}`}
@@ -72,7 +76,6 @@ class TodoItem extends React.Component {
 
   render() {
     if (this.props.editing === this.props.task.id) {
-      
       return this.formEditting()
     }
 

@@ -7,21 +7,21 @@ import { toogleTodo, deleteTodo, changeEdit, clearEditing, saveEdit, editTaskNam
 import TodoItem from './TodoItem'
 
 
-const TodoNode = ({ todo, formEdit, editing, clearEditing, formTaskEditName, saveEdit, changeEdit, onCompletedTodo, onDeleteTodo }) => {
-  if (!todo.length) return <li className="list-group-item task-item text-center">Nenhuma tarefa encontrada</li>
+const TodoNode = (props) => {
+  if (!props.todo.length) return <li className="list-group-item task-item text-center">Nenhuma tarefa encontrada</li>
   
-  return todo.map((task, key) => {
+  return props.todo.map((task, key) => {
     return <TodoItem
       task={task}
       key={key}
-      editing={editing}
-      formEdit={formEdit}
-      onSubmit={(name) => saveEdit(task.id, name)}
-      formTaskEditName={(name) => formTaskEditName(name)}
-      changeEdit={() => changeEdit(task)}
-      clearEditing={() => clearEditing(task.id)}
-      onCompleted={() => onCompletedTodo(task.id)}
-      onDelete={() => onDeleteTodo(task.id)}
+      editing={props.editing}
+      formEdit={props.formEdit}
+      onSubmit={(name) => props.saveEdit(task.id, name)}
+      formTaskEditName={(name) => props.formTaskEditName(name)}
+      changeEdit={() => props.changeEdit(task)}
+      clearEditing={() => props.clearEditing(task.id)}
+      onCompleted={() => props.onCompletedTodo(task.id)}
+      onDelete={() => props.onDeleteTodo(task.id)}
     />
   })
 }
