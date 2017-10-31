@@ -21,12 +21,7 @@ export const todo = (state = [], { type, payload }) => {
           : todo
       )
     case 'DELETE_TODO':
-      newState = Object.assign([], state)
-      const indexOfState = state.findIndex(todo => todo.id === payload.id)
-
-      newState.splice(indexOfState, 1)  
-
-      return newState
+      return state.filter(todo => todo.id !== payload.id)
     case 'SAVE_EDITING':
       console.log('SAVE_EDITING')  
         return state.map(todo =>
