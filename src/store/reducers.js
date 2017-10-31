@@ -23,7 +23,6 @@ export const todo = (state = [], { type, payload }) => {
     case 'DELETE_TODO':
       return state.filter(todo => todo.id !== payload.id)
     case 'SAVE_EDITING':
-      console.log('SAVE_EDITING')  
         return state.map(todo =>
         (todo.id === payload.id) 
           ? {...todo, name: payload.name}
@@ -38,7 +37,6 @@ export const todo = (state = [], { type, payload }) => {
 export const editing = (state = null, { type, payload }) => {
   switch (type) {
     case 'CHANGE_EDITING':
-      console.log('CHANGE_EDITING')  
       return payload.id
     case 'CLEAR_EDITING':
       return null
@@ -47,13 +45,21 @@ export const editing = (state = null, { type, payload }) => {
   }
 }
 
-
+export const formEdit = (state = 'editando', { type, payload }) => {
+  switch (type) {
+    case 'CHANGE_TASK_NAME':
+      return payload.name
+    default:
+      return state  
+  }
+}
 
 
 
 const reducers = combineReducers({
   todo,
-  editing
+  editing,
+  formEdit
 })
 
 export default reducers

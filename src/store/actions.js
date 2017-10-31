@@ -51,3 +51,12 @@ export const saveEdit = (id, name) => {
     }
   }
 }
+export const editTaskName = (name) => {
+  return {
+    type: 'CHANGE_TASK_NAME',
+    payload: {
+      id: 0,
+      name
+    }
+  }
+}

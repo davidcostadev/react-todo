@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { toogleTodo, deleteTodo, changeEdit, clearEditing, saveEdit } from '../store/actions'
+import { toogleTodo, deleteTodo, changeEdit, clearEditing, saveEdit, editTaskName } from '../store/actions'
 
 // Components
 import TodoItem from './TodoItem'
 
 
-const TodoNode = ({ todo, editing, clearEditing, saveEdit, changeEdit, onCompletedTodo, onDeleteTodo }) => {
+const TodoNode = ({ todo, formEdit, editing, clearEditing, formTaskEditName, saveEdit, changeEdit, onCompletedTodo, onDeleteTodo }) => {
   if (!todo.length) return <li className="list-group-item task-item text-center">Nenhuma tarefa encontrada</li>
   
   return todo.map((task, key) => {
@@ -15,8 +15,10 @@ const TodoNode = ({ todo, editing, clearEditing, saveEdit, changeEdit, onComplet
       task={task}
       key={key}
       editing={editing}
+      formEdit={formEdit}
       onSubmit={(name) => saveEdit(task.id, name)}
-      changeEdit={() => { changeEdit(task.id); console.log('changeEdit') }}
+      formTaskEditName={(name) => formTaskEditName(name)}
+      changeEdit={() => changeEdit(task)}
       clearEditing={() => clearEditing(task.id)}
       onCompleted={() => onCompletedTodo(task.id)}
       onDelete={() => onDeleteTodo(task.id)}
@@ -43,8 +45,12 @@ const mapStateChange = dispatch => {
       dispatch(saveEdit(id, name))
       dispatch(clearEditing(id))
     },
-    changeEdit: id => dispatch(changeEdit(id)),
+    changeEdit: ({ id, name }) => {
+      dispatch(changeEdit(id))
+      dispatch(editTaskName(name))
+    },
     clearEditing: id => dispatch(clearEditing(id)),
+    formTaskEditName: name => dispatch(editTaskName(name)),
   }
 }
 

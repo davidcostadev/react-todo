@@ -11,7 +11,7 @@ class TodoItem extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
+   this.state = {
       task: props.task.name
     }
   }
@@ -33,9 +33,10 @@ class TodoItem extends React.Component {
       key={this.props.task.id}>
         <input
           type="text"
-          value={this.state.task}
-          onChange={e => this.handleInputChange(e)} />
-        <button type="button" className="btn btn-save btn-sm btn-outline-success" onClick={() => this.props.onSubmit(this.state.task)}>
+          ref={(input) => this.editTodoInput = input}
+          value={this.props.formEdit}
+          onChange={e => this.props.formTaskEditName(e.target.value)} />
+        <button type="button" className="btn btn-save btn-sm btn-outline-success" onClick={() => this.props.onSubmit(this.props.formEdit)}>
           <i className="material-icons">save</i>
         </button>
         <button type="button" className="btn btn-cancel btn-sm btn-outline-danger" onClick={this.props.clearEditing}>
@@ -71,6 +72,7 @@ class TodoItem extends React.Component {
 
   render() {
     if (this.props.editing === this.props.task.id) {
+      
       return this.formEditting()
     }
 
