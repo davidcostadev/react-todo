@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import { toogleTodo, deleteTodo, changeEdit, clearEditing, saveEdit } from '../store/actions'
 
 // Components
-import Checkbox from './Checkbox'
 import TodoItem from './TodoItem'
 
 

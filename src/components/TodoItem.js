@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 
 import '~assets/todo.scss'
+
+// Components
+import Checkbox from './Checkbox'
+
 
 class TodoItem extends React.Component {
   constructor(props) {
