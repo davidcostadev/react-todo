@@ -21,4 +21,24 @@
   label {
     margin-bottom: 0;
   }
+
+  .task-item-content,
+  input {
+      flex: 1 100%;
+      margin-right: 15px;
+  }
+  .btn+.btn {
+    margin-left: 15px;
+  }
+  .btn-delete {
+  }
+  .btn-edit {
+
+  }
+  .btn-save {
+
+  }
+  .btn-cancel {
+
+  }
 }
