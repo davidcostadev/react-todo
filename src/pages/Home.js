@@ -5,21 +5,19 @@ import { connect } from 'react-redux'
 
 // import TodoList from '~components/Todo'
 import Errors from '~components/Errors'
-
-import { addTodo } from '../store/actions'
-
-
 import TodoListNew from '~components/TodoList'
 import TodoForm from '~components/TodoForm'
-
 import ToolBar from '~layout/Toolbar'
-
+// import { addTodo, fetchData } from '../store/actions'
+// import configureStore from ''
 
 // let AddTodo = ({ dispatch }) => {
 //   dispatch(addTodo())
 // }
 
-// AddTodo = connect()(AddTodo)
+// AddTodo = connect((dispatch) => {
+
+// })()
 
 // const tasks = [
 //   { id:'1', name: 'Tarefa 1', completed: false },
@@ -39,9 +37,17 @@ export default class Home extends React.Component {
       btnAddDisabled: true
     }
 
+    // this.store = configureStore();
+
+    // this.loadData()
+
     this.handleChange = this.handleChange.bind(this);
     this.addTask = this.addTask.bind(this);
   }
+
+  // loadData() {
+  //   this.store.dispacth(fetchData('https://api.myjson.com/bins/1bsn17'))
+  // }
 
   handleChange(event) {
     this.setState({

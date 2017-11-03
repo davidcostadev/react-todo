@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { 
   ADD_TODO,
   TOGGLE_TODO,
@@ -68,5 +69,40 @@ export const editTaskName = (name) => {
       id: 0,
       name
     }
+  }
+}
+
+export function requestData(json) {
+  return {
+    type: REQUEST_DATA
+  }
+}
+export function receiveData(json) {
+  return {
+    type: RECEIVE_DATA,
+    payload: json
+  }
+}
+export function receiveError(json) {
+  return {
+    type: RECEIVE_ERROR,
+    payload: json
+  }
+}
+
+
+export function fetchData(url) {
+  return (dispatch) => {
+    dispatch(requestData())
+
+    return axios(url)
+      .then(response => {
+        console.log(response)
+        dispatch(receiveData(response.data))
+      })
+      .catch(error => {
+        console.log(error)
+        dispatch(receiveError(error.data))
+      })
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { toogleTodo, deleteTodo, changeEdit, clearEditing, saveEdit, editTaskName } from '../store/actions'
+import { toogleTodo, deleteTodo, changeEdit, clearEditing, saveEdit, editTaskName, fetchData } from '../store/actions'
 
 // Components
 import TodoItem from './TodoItem'
@@ -27,6 +27,7 @@ const TodoNode = (props) => {
 }
 
 const TodoList = (payload) => {
+  payload.fetchData('https://api.myjson.com/bins/1bsn17')
   return <ul className="list-group tasks">{TodoNode(payload)}</ul>
 }
 
@@ -51,6 +52,7 @@ const mapStateChange = dispatch => {
     },
     clearEditing: id => dispatch(clearEditing(id)),
     formTaskEditName: name => dispatch(editTaskName(name)),
+    fetchData: url => dispatch(fetchData(url))
   }
 }
 
